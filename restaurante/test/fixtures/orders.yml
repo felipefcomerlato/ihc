@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 1.5
+  description: MyText
+  obs: MyText
+  qtd: 1
+  bill: one
+
+two:
+  value: 1.5
+  description: MyText
+  obs: MyText
+  qtd: 1
+  bill: two

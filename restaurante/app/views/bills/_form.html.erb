@@ -1,0 +1,25 @@
+<%= form_with(model: bill, local: true, :html => {:style => 'width: 50%; margin: 0 auto;'}) do |form| %>
+  <% if bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% bill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_field :value, value: 0, type: 'hidden' %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :status, value: 'aberta', type: 'hidden' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'FAZER PEDIDO', :class => 'new_bill_button btn btn-success' %>
+  </div>
+<% end %>

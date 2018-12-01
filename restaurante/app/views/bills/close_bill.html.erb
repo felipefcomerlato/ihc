@@ -1,0 +1,24 @@
+<div class="closed-bill">
+  <table width="100%">
+    <tr>
+      <td colspan="2" class="closed-bill-total-value">
+        <% orders_total = "%0.02f" % @orders.sum(:value).round(2) %>
+        Total: R$ <%= orders_total.to_s.sub(".",",") %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="closed-bill-payment-label">
+    Forma de pagamento: <br><br> Toque em uma das opções abaixo!
+  </div>
+
+  <div>
+    <%= link_to image_tag("master.jpg", :style => "width: 15%;"), payment_type_path(:value => orders_total, :bill_id => @bill, :card => "master") %>
+    <%= link_to image_tag("visa.jpg", :style => "width: 15%;"), payment_type_path(:value => orders_total, :bill_id => @bill, :card => "visa") %>
+    <%= link_to image_tag("hiper.jpg", :style => "width: 15%;"), payment_type_path(:value => orders_total, :bill_id => @bill, :card => "hiper") %>
+    <%= link_to image_tag("elo.jpg", :style => "width: 15%;"), payment_type_path(:value => orders_total, :bill_id => @bill, :card => "elo") %>
+    <%= link_to image_tag("american.png", :style => "width: 12%;"), payment_type_path(:value => orders_total, :bill_id => @bill, :card => "american") %>
+    <%= link_to image_tag("cash.jpg", :style => "width: 10%;"), payment_type2_path(:value => orders_total, :bill_id => @bill, :card => "cash") %>
+  </div>
+
+</div>

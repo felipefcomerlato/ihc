@@ -1,0 +1,13 @@
+<div class="new_bill_label"></div>
+
+<div style="border:0px solid red;">
+<%= render 'form', bill: @bill %>
+</div>
+
+<div style="width:25%; border:0px solid blue; margin-right:7%; margin-top:-4%; float:right; position: relative;">
+  <%= image_tag("touch-icon.png", :alt => "Touch here", :style => "width: 50%; transform: rotate(45deg);") %>
+  <br><span style="margin-left:10%;">Toque para começar</span>
+</div>
+
+
+<!-- <%= link_to 'Back', bills_path %> -->

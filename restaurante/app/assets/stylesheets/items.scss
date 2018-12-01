@@ -1,0 +1,106 @@
+// Place all the styles related to the Items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.menu-my-orders{
+  width: 25%;
+  float:left;
+  border:0px solid red;
+  padding: 0.8em;
+  text-align:right;
+}
+
+.menu-my-orders-each{
+  border-bottom:1px solid #DDD;
+  padding:0.6em;
+  text-align: right;
+}
+
+.menu-my-order-name{
+  font-weight: bold;
+}
+.menu-my-order-value{
+  text-align:right;
+}
+.menu-my-order-status-0{ /* solicitado */
+  color: blue;
+}
+.menu-my-order-status-1{ /* em preparo */
+  color: red;
+}
+.menu-my-order-status-2{ /* pronto */
+  color: green;
+}
+.menu-my-orders-total{
+  text-align:right;
+  padding:0.6em;
+}
+
+.menu-my-orders-total-label::before{
+  content: "Total: ";
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.menu-items{
+  margin-left:10px;
+  float:left;
+  border: 0px solid green;
+  width:70%;
+  background-color:rgba(245,245,245,0.8);
+  padding:1em;
+}
+
+.menu-item-column-photo{
+  width: 15%;
+}
+
+.menu-item-name{
+  font-weight: bold;
+  font-size: 2em;
+  padding-bottom: 0.2em;
+}
+
+.menu-item-description{
+  font-style: italic;
+  color:#555;
+  font-size: 1.3em;
+}
+
+.menu-item-value{
+  font-size: 1.3em;
+}
+
+.menu-item-btn{
+  width: 100%;
+}
+
+.menu-item-change-ingredients-name{
+  font-weight: bold;
+  font-size: 1.5em;
+  text-align: right;
+  padding-top:10px;
+}
+
+.menu-item-change-ingredients-resume{
+  font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  width: 50%;
+}
+
+.menu-item-change-ingredients-completed{
+  color: green;
+  font-weight: bold;
+  padding:10px;
+}
+
+.menu-item-change-ingredients-removeds{
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.menu-item-change-ingredients-check-img{
+  width: 40px;
+}

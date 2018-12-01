@@ -1,0 +1,70 @@
+<table>
+  <tr>
+    <td>
+      <h1><%= @item.name %></h1>
+      <%= @item.description %>
+      <br><br>
+    </td>
+    <td>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table>
+      <% removeds = 0 %>
+      <% obs = [] %>
+      <% @ingredients.order(name: :asc).each do |ing| %>
+        <tr>
+          <td class="menu-item-change-ingredients-name">
+            <%= ing.name %>
+          </td>
+          <% if ing.contained == 0 %>
+            <% removeds += 1 %>
+            <% cont = 1 %>
+            <% butt = "Adicionar" %>
+            <% btn_class = "btn btn-success" %>
+            <% check = "uncheck.png" %>
+          <% else %>
+            <% cont = 0 %>
+            <% butt = "Remover" %>
+            <% btn_class = "btn btn-danger" %>
+            <% check = "check.png" %>
+          <% end %>
+          <td class="menu-item-change-ingredients-check-img">
+            <%= image_tag(check, :style => "width: 80%;") %>
+          </td>
+          <td>
+            <%= button_to butt, amount_change_path(contained: cont, id: ing.id), :method => :post, :class => btn_class %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </td>
+    <td class="menu-item-change-ingredients-resume">
+      <%= @item.name %><br><br>
+      <% if removeds == 0 %>
+        <div class="menu-item-change-ingredients-completed">
+          <% if @item.category_id == 4 %>
+            <%= "Com gelo e limão!" %>
+          <% else %>
+            <%= "COMPLETO!" %>
+          <% end %>
+        </div>
+      <% else %>
+        <% @ingredients.where(contained: 0, item_id: @item.id).each do |ing| %>
+          <div class="menu-item-change-ingredients-removeds">
+            <%= "Sem #{ing.name}" %>
+          </div>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <%= button_to 'Pedir', add_order_path(name: @item.name, value: @item.value, :description => @item.description, :obs => '', :qtd => 1, :bill_id => @bill, :item_id => @item.id), :method => :post, :class => 'btn btn-success menu-item-btn' %>
+      <br />
+      <%= button_to 'Voltar ao menu', back_to_menu_path(:bill_id => @bill), :method => :post, :class => 'btn btn-primary menu-item-btn' %>
+    </td>
+  </tr>
+</table>

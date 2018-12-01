@@ -1,0 +1,102 @@
+<div class="menu-my-orders">
+  <h2> Minha comanda </h2>
+  <h6> <%= "Mesa 01 - Comanda Nº #{@bill}" %> </h6>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.order(created_at: :asc).each do |order| %>
+        <tr>
+          <td class="menu-my-orders-each">
+            <span class="menu-my-order-name"><%= order.name %></span>
+            <br>
+            <span class="menu-my-order-obs">
+              <%= "(#{order.obs})" if order.obs != "" %>
+            </span>
+            <span class="menu-my-order-value">
+                <% if order.obs != "" %>
+                  <br>
+                <% end %>
+                <% order_value = "%0.02f" % order.value.round(2) %>
+                R$<%= order_value.to_s.sub(".",",") %>
+            </span>
+          </td>
+          <td class="menu-my-orders-each" style="width:90px;">
+            <span class="menu-my-order-status-<%=order.status%>">
+                <% if order.status == 0 %>
+                  Solicitado
+                <% elsif order.status == 1 %>
+                  Em preparo
+                <% elsif order.status == 2 %>
+                  Pronto!
+                <% end %>
+                <!-- <img src="images/" -->
+            </span>
+          </td>
+        </tr>
+      <% end %>
+        <tr>
+          <td class="menu-my-orders-total">
+            <% if @orders.sum(:value) != 0 %>
+              <% orders_total = "%0.02f" % @orders.sum(:value).round(2) %>
+              <span class="menu-my-orders-total-label">R$ <%= orders_total.to_s.sub(".",",") %></span>
+            <% else %>
+              Faça seu primeiro pedido!
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <% if @orders.sum(:value) != 0 %>
+              <%= button_to 'Fechar comanda', close_bill_path(:bill_id => @bill), :method => :post, :class => 'btn btn-danger' %>
+            <% end %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="menu-items">
+  <h2> Cardápio </h2>
+  <table width="100%">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @items.each do |item| %>
+          <% if item.photo %>
+            <% img_item = "items/#{item.photo}" %>
+          <% else %>
+            <% img_item = "items/brasserie_prato_dez.jpg" %>
+          <% end %>
+          <tr>
+            <td class="menu-item-column-photo"><%= image_tag(img_item, :style => "width: 100%;") %></td>
+            <td>
+              <div class="menu-item-name"><%= item.name %></div>
+              <div class="menu-item-description"><%= item.description %></div>
+            </td>
+            <% item_value = "%0.02f" % item.value.round(2) %>
+            <td class="menu-item-value">R$<%= item_value.to_s.sub(".",",") %> </td>
+            <td>
+              <% if [1,2,3,4,6].include?(item.category_id) %>
+                <%= button_to 'Ver / modificar', edit_order_items_path(item_id: item.id, bill_id: @bill), :method => :post, :class => 'btn btn-primary menu-item-btn' %>
+              <% end %>
+            </td>
+            <td><%= button_to 'Pedir', add_order_path(name: item.name, value: item.value, :description => item.description, :obs => '', :qtd => 1, :bill_id => @bill, :item_id => item.id), :method => :post, :class => 'btn btn-success menu-item-btn' %>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>

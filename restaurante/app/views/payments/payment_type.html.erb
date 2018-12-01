@@ -1,0 +1,36 @@
+<div class="closed-bill">
+  <table width="100%">
+    <tr>
+      <td colspan="2" class="closed-bill-total-value">
+        Total: R$ <%= @value.to_s.sub(".",",") %>
+      </td>
+    </tr>
+  </table>
+  <br><br>
+  <span style="font-size:25px;">
+    Você escolheu pagar com
+  </span>
+  <%= image_tag("#{@card}.jpg", :style => "width: 15%;") %>
+
+  <br><br>
+
+  <table width="100%">
+    <tr>
+      <td colspan="2">
+        <br><br>
+        <span style="font-size:18px;">
+          Débito ou crédito? Toque para escolher.
+        </span>
+        <br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="width:50%;">
+        <%= button_to 'Débito', payment_instructions_path(option: 1, card: @card, bill_id: @bill, value: @value), :method => :post, :class => 'btn btn-primary btn-card-type' %>
+      </td>
+      <td>
+        <%= button_to 'Crédito', payment_instructions_path(option: 2, card: @card, bill_id: @bill, value: @value), :method => :post, :class => 'btn btn-primary btn-card-type' %>
+      </td>
+    </tr>
+  </table>
+</div>

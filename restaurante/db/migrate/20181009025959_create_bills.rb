@@ -1,0 +1,10 @@
+class CreateBills < ActiveRecord::Migration[5.2]
+  def change
+    create_table :bills do |t|
+      t.float :value
+      t.string :status
+
+      t.timestamps
+    end
+  end
+end

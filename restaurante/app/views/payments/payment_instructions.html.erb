@@ -1,0 +1,41 @@
+<div class="closed-bill">
+  <table width="100%">
+    <tr>
+      <td colspan="2" class="closed-bill-total-value">
+        Total: R$ <%= @value.to_s.sub(".",",") %>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <span style="font-size:25px;">
+    Você escolheu pagar com
+  </span>
+  <%= image_tag("#{@card}.jpg", :style => "width: 15%;") %>
+  <span style="font-size:25px;">
+    <% if @option == '1' %>
+      <%= "(Débito)" %>
+    <% else %>
+      <%= "(Crédito)" %>
+    <% end %>
+  </span>
+
+  <table width="100%">
+    <tr>
+      <td colspan="2">
+        <br><br>
+        <span style="font-size:18px;">
+          Instruções:<br><br>
+          1 - Insira o seu cartão na máquina<br>
+          2 - Aguarde 5 segundos<br>
+          3 - Digite a sua senha e aperte o botão "Confirma"
+        </span>
+        <br><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= render 'evaluation' %>
+      </td>
+    </tr>
+  </table>
+</div>

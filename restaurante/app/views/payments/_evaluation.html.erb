@@ -1,0 +1,25 @@
+<hr />
+<span style="font-size:18px;">
+  Avalie o nosso sistema!
+</span>
+
+<br><br>
+<table width="100%">
+  <tr>
+    <td>
+      <%= button_to 'Muito ruim', end_eval_path, :class => 'btn btn-danger btn-eval' %>
+    </td>
+    <td>
+      <%= button_to 'Ruim', end_eval_path, :class => 'btn btn-warning btn-eval' %>
+    </td>
+    <td>
+      <%= button_to 'Regular', end_eval_path, :class => 'btn btn-secondary btn-eval' %>
+    </td>
+    <td>
+      <%= button_to 'Bom', end_eval_path, :class => 'btn btn-primary btn-eval' %>
+    </td>
+    <td>
+      <%= button_to 'Excelente', end_eval_path, :class => 'btn btn-success btn-eval' %>
+    </td>
+  </tr>
+</table>

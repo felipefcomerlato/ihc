@@ -1,0 +1,32 @@
+<div class="closed-bill">
+  <table width="100%">
+    <tr>
+      <td colspan="2" class="closed-bill-total-value">
+        Total: R$ <%= @value.to_s.sub(".",",") %>
+      </td>
+    </tr>
+  </table>
+  <br><br>
+  <span style="font-size:25px;">
+    Você escolheu pagar em <span style="color:green;">dinheiro</span>!
+  </span>
+
+  <br><br>
+
+  <table width="100%">
+    <tr>
+      <td colspan="2">
+        <br><br>
+        <span style="font-size:18px;">
+          Um garçom está se dirigindo à sua mesa. Aguarde!
+        </span>
+        <br><br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= render 'evaluation' %>
+      </td>
+    </tr>
+  </table>
+</div>
