@@ -52,7 +52,7 @@
         <tr>
           <td>
             <% if @orders.sum(:value) != 0 %>
-              <%= button_to 'Fechar comanda', close_bill_path(:bill_id => @bill), :method => :post, :class => 'btn btn-danger' %>
+              <%= button_to 'Fechar comanda', close_bill_path(:bill_id => @bill), :method => :post, :class => 'btn btn-warning' %>
             <% end %>
           </td>
         </tr>
@@ -73,9 +73,41 @@
         <th></th>
       </tr>
     </thead>
-
     <tbody>
-      <% @items.each do |item| %>
+      <tr>
+        <td class="cardapio-categoria">
+          Lanches
+        </td>
+      </tr>
+      <% @items.where(category_id: 3).each do |item| %>
+          <% if item.photo %>
+            <% img_item = "items/#{item.photo}" %>
+          <% else %>
+            <% img_item = "items/brasserie_prato_dez.jpg" %>
+          <% end %>
+          <tr>
+            <td class="menu-item-column-photo"><%= image_tag(img_item, :style => "width: 100%;") %></td>
+            <td>
+              <div class="menu-item-name"><%= item.name %></div>
+              <div class="menu-item-description"><%= item.description %></div>
+            </td>
+            <% item_value = "%0.02f" % item.value.round(2) %>
+            <td class="menu-item-value">R$<%= item_value.to_s.sub(".",",") %> </td>
+            <td>
+              <% if [1,2,3,4,6].include?(item.category_id) %>
+                <%= button_to 'Ver / modificar', edit_order_items_path(item_id: item.id, bill_id: @bill), :method => :post, :class => 'btn btn-primary menu-item-btn' %>
+              <% end %>
+            </td>
+            <td><%= button_to 'Pedir', add_order_path(name: item.name, value: item.value, :description => item.description, :obs => '', :qtd => 1, :bill_id => @bill, :item_id => item.id), :method => :post, :class => 'btn btn-success menu-item-btn' %>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td class="cardapio-categoria">
+            Bebidas
+          </td>
+        </tr>
+      <% @items.where(category_id: 4).each do |item| %>
           <% if item.photo %>
             <% img_item = "items/#{item.photo}" %>
           <% else %>
@@ -100,3 +132,21 @@
     </tbody>
   </table>
 </div>
+
+<script>
+
+$(document).ready(function () {
+  $("a[data-confirm]").data({
+    "confirm-fade": true,
+    "confirm-title": "Call to Buzz"
+  });
+  $("a[data-method=delete]").data({
+    "confirm-title": "Warning",
+    "confirm-cancel": "Cancel",
+    "confirm-cancel-class": "btn-cancel",
+    "confirm-proceed": "Delete",
+    "confirm-proceed-class": "btn-danger"
+  });
+});
+
+</script>
